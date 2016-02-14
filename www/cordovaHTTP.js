@@ -139,7 +139,7 @@ if (typeof angular !== "undefined") {
                 return makePromise(http.get, [url, params, headers], true);
             },
             del: function(url, params, headers) {
-                return makePromise(http.delete_, [url, params, headers], true);
+                return makePromise(http.del, [url, params, headers], true);
             },
             uploadFile: function(url, params, headers, filePath, name) {
                 return makePromise(http.uploadFile, [url, params, headers, filePath, name], true);
