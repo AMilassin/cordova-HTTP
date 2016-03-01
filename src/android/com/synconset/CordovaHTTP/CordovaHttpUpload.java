@@ -83,7 +83,9 @@ public class CordovaHttpUpload extends CordovaHttp implements Runnable {
             this.respondWithError("There was an error loading the file");
         } catch (JSONException e) {
             this.respondWithError("There was an error generating the response");
-        }  catch (HttpRequestException e) {
+        } catch (IllegalArgumentException e) {
+            this.respondWithError("There was an error handling the file upload request: " + e.getMessage());
+        } catch (HttpRequestException e) {
             if (e.getCause() instanceof UnknownHostException) {
                 this.respondWithError(0, "The host could not be resolved");
             } else if (e.getCause() instanceof SSLHandshakeException) {
