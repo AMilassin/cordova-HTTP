@@ -99,7 +99,7 @@
     NSDictionary *headers = [command.arguments objectAtIndex:2];
     
     [headers setValue:@"application/json" forKey:@"Content-Type"];
-    [self setRequestHeaders: headers];
+    [self setRequestHeaders: headers forManager: manager];
    
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [TextResponseSerializer serializer];
@@ -107,8 +107,8 @@
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         [self setResults: dictionary withTask: task];
         [dictionary setObject:responseObject forKey:@"data"];
-        if (operation.response.statusCode == 201) {
-          [dictionary setValue:[[operation.response allHeaderFields] valueForKey:@"Location"] forKey:@"location"];
+        if (task.response.statusCode == 201) {
+          [dictionary setValue:[[task.response allHeaderFields] valueForKey:@"Location"] forKey:@"location"];
         }
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -127,17 +127,17 @@
     NSString *url = [command.arguments objectAtIndex:0];
     NSDictionary *parameters = [command.arguments objectAtIndex:1];
     NSDictionary *headers = [command.arguments objectAtIndex:2];
-    [self setRequestHeaders: headers];
+    [self setRequestHeaders: headers forManager: manager];
     
    
    CordovaHttpPlugin* __weak weakSelf = self;
    manager.responseSerializer = [TextResponseSerializer serializer];
-   [manager PUT:url parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+   [manager PUT:url parameters:parameters success:^(NSURLSessionTask *task, id responseObject) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         [self setResults: dictionary withTask: task];
         [dictionary setObject:responseObject forKey:@"data"];
-        if (operation.response.statusCode == 201) {
-            [dictionary setValue:[[operation.response allHeaderFields] valueForKey:@"Location"] forKey:@"location"];
+        if (task.response.statusCode == 201) {
+            [dictionary setValue:[[task.response allHeaderFields] valueForKey:@"Location"] forKey:@"location"];
         }
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -158,16 +158,16 @@
     NSDictionary *headers = [command.arguments objectAtIndex:2];
 
     [headers setValue:@"application/json" forKey:@"Content-Type"];
-    [self setRequestHeaders: headers];
+    [self setRequestHeaders: headers forManager: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [TextResponseSerializer serializer];
-    [manager PUT:url parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+    [manager PUT:url parameters:parameters success:^(NSURLSessionTask *task, id responseObject) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         [self setResults: dictionary withTask: task];
         [dictionary setObject:responseObject forKey:@"data"];
-        if (operation.response.statusCode == 201) {
-          [dictionary setValue:[[operation.response allHeaderFields] valueForKey:@"Location"] forKey:@"location"];
+        if (task.response.statusCode == 201) {
+          [dictionary setValue:[[task.response allHeaderFields] valueForKey:@"Location"] forKey:@"location"];
         }
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -238,13 +238,13 @@
     NSString *url = [command.arguments objectAtIndex:0];
     NSDictionary *parameters = [command.arguments objectAtIndex:1];
     NSDictionary *headers = [command.arguments objectAtIndex:2];
-    [self setRequestHeaders: headers];
+    [self setRequestHeaders: headers forManager: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
 
     manager.responseSerializer = [TextResponseSerializer serializer];
     
-    [manager DELETE:url parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+    [manager DELETE:url parameters:parameters success:^(NSURLSessionTask *task, id responseObject) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         [self setResults: dictionary withTask: task];
         [dictionary setObject:responseObject forKey:@"data"];
