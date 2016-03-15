@@ -101,11 +101,6 @@ public class CordovaHttpPlugin extends CordovaPlugin {
             HashMap<String, String> headersMap = this.getStringMapFromJSONObject(headers);
             CordovaHttpPutJson putJson = new CordovaHttpPutJson(urlString, jsonObj, headersMap, callbackContext);
             cordova.getThreadPool().execute(putJson);
-        } else if (action.equals("useBasicAuth")) {
-            String username = args.getString(0);
-            String password = args.getString(1);
-            this.useBasicAuth(username, password);
-            callbackContext.success();
         } else if (action.equals("enableSSLPinning")) {
             try {
                 boolean enable = args.getBoolean(0);
